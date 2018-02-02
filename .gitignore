@@ -2,6 +2,8 @@
 *.iml
 out
 target
-target/database
-target/service
-target/web
+database/src/main/java/by/itacademy/dao
+database/src/test/java/by/itacademy/dao
+database/target
+service/targer
+web/targer
