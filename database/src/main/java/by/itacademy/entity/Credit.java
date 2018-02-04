@@ -7,10 +7,11 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
@@ -19,21 +20,20 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@ToString
 @Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "credits")
-public class Credit extends BaseEntity {
+@ToString(exclude = "creditApplications")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "interest_type")
+public abstract class Credit extends BaseEntity {
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "guarantors")
+    @Column(name = "guarantors", nullable = false)
     private Integer guarantors;
-
-    @Column(name = "interest_rate")
-    private Double interestRate;
 
     @OneToMany(mappedBy = "credit", orphanRemoval = true)
     private List<CreditApplication> creditApplications = new ArrayList<>();

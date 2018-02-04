@@ -17,9 +17,9 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@ToString
 @Entity
+@ToString
+@NoArgsConstructor
 @Table(name = "applications")
 public class CreditApplication extends BaseEntity {
 

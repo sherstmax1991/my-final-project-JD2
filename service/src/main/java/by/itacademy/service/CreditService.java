@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CreditService {
 
-    public List<Credit> getFirstCredit() {
-        return new CreditDao().getCredits();
+    public List<Credit> getCredits() {
+        return CreditDao.getInstance().getAllCredits();
     }
 }

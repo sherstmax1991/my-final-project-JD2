@@ -25,12 +25,12 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString(exclude = {"children"})
 @Entity
 @Embeddable
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "clients")
+@ToString(exclude = {"children", "creditApplications"})
 public class Client extends BaseEntity {
 
     @Column(name = "first_name", nullable = false)
@@ -49,9 +49,9 @@ public class Client extends BaseEntity {
     @Column(name = "login", unique = true)
     private String login;
 
-    @Column(name = "client_rating", nullable = false)
+    @Column(name = "rating", nullable = false)
     @Enumerated(EnumType.STRING)
-    private ClientRating clientRating;
+    private ClientRating rating;
 
     @Column(name = "marital_status", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -66,5 +66,5 @@ public class Client extends BaseEntity {
     private List<Child> children = new ArrayList<>();
 
     @OneToMany(mappedBy = "client", orphanRemoval = true)
-    List<CreditApplication> creditApplications = new ArrayList<>();
+    private List<CreditApplication> creditApplications = new ArrayList<>();
 }
