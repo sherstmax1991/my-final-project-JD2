@@ -1,40 +1,40 @@
 package by.itacademy.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
 import javax.persistence.Column;
-import javax.persistence.GenerationType;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@ToString
+@Embeddable
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "credits")
-public class Credit {
+@ToString(exclude = "creditApplications")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "interest_type")
+public abstract class Credit extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column
+    @Column(name = "guarantors", nullable = false)
     private Integer guarantors;
 
-    @Column(name = "interest_rate")
-    private Double interestRate;
-
-    public Credit(String title, Integer guarantors, Double interestRate) {
-        this.title = title;
-        this.guarantors = guarantors;
-        this.interestRate = interestRate;
-    }
+    @OneToMany(mappedBy = "credit", orphanRemoval = true)
+    private List<CreditApplication> creditApplications = new ArrayList<>();
 }

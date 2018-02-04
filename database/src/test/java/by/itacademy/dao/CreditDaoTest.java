@@ -2,34 +2,27 @@ package by.itacademy.dao;
 
 import by.itacademy.entity.Credit;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.junit.AfterClass;
+import org.hibernate.Transaction;
+import org.junit.Assert;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-public class CreditDaoTest {
-
-    private static final SessionFactory SESSION_FACTORY
-            = new Configuration().configure().buildSessionFactory();
+public class CreditDaoTest extends BaseTest{
 
     @Test
-    public void testSaveToDb() {
+    public void testSaveAndLoad() {
         Session session = SESSION_FACTORY.openSession();
-        Credit credit = new Credit("Super Loan", 2, 13.0);
-        session.save(credit);
+        Transaction transaction = session.beginTransaction();
 
-        Credit foundEmployee = session.find(Credit.class, 1L);
-        assertThat(foundEmployee.getTitle(), is("Super Loan"));
-        assertThat(foundEmployee.getGuarantors(), is(2));
-        assertThat(foundEmployee.getInterestRate(), is("13.0"));
+        CreditDao.getInstance().addCredit(session, CREDIT_WITH_FIXED_INTEREST);
+        CreditDao.getInstance().addCredit(session, CREDIT_WITH_VARIABLE_INTEREST);
+
+        Credit firstLoaded = CreditDao.getInstance().getCredit(session, 1L);
+        Credit secondLoaded = CreditDao.getInstance().getCredit(session, 2L);
+
+        Assert.assertEquals(firstLoaded, CREDIT_WITH_FIXED_INTEREST);
+        Assert.assertEquals(secondLoaded, CREDIT_WITH_VARIABLE_INTEREST);
+
+        transaction.commit();
         session.close();
-    }
-
-    @AfterClass
-    public static void finish() {
-        SESSION_FACTORY.close();
     }
 }
