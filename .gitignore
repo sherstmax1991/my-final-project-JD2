@@ -2,6 +2,6 @@
 *.iml
 out
 target
-database/target
-service/targer
-web/targer
+target/database
+target/service
+target/web
