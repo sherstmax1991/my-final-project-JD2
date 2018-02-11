@@ -14,7 +14,7 @@ public class ChildrenServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("children", new ChildService().getChildren());
+        req.setAttribute("children", ChildService.getInstance().getChildren());
         req.getRequestDispatcher("/WEB-INF/jsp/children.jsp")
                 .forward(req, resp);
     }

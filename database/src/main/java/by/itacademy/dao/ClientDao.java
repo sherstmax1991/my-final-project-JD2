@@ -1,14 +1,10 @@
 package by.itacademy.dao;
 
 import by.itacademy.entity.Client;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import lombok.ToString;
 
-import java.util.Collection;
-import java.util.List;
-
-public final class ClientDao {
+@ToString
+public final class ClientDao extends BaseDao<Client> {
 
     private static ClientDao INSTANCE;
 
@@ -26,30 +22,8 @@ public final class ClientDao {
         return INSTANCE;
     }
 
-    public List<Client> getAllClients() {
-        SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        List<Client> clients = session.createQuery("from Client ", Client.class).list();
-        session.close();
-        sessionFactory.close();
-        return clients;
-    }
-
-    public List<Client> getAllClients(Session session) {
-        return session.createQuery("from Client ", Client.class).list();
-    }
-
-    public Client getClient(Session session, Long id) {
-        return session.get(Client.class, id);
-    }
-
-    public void addClient(Session session, Client client) {
-        session.save(client);
-    }
-
-    public void addAllClients(Session session, Collection<Client> clients) {
-        for (Client client : clients) {
-            session.save(client);
-        }
+    @Override
+    protected Class<Client> getEntityClass() {
+        return Client.class;
     }
 }

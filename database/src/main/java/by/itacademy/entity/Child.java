@@ -20,7 +20,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@ToString
+@ToString(exclude = "parents")
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "children")

@@ -13,12 +13,13 @@ public class ChildDaoTest extends BaseTest {
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
-        ChildDao.getInstance().addChild(session, CHILD);
+        ChildDao.getInstance().save(session, CHILD);
+        Child found = ChildDao.getInstance().findById(session, 1L);
 
-        Child loadedChild = ChildDao.getInstance().getChild(session, 1L);
-        Assert.assertEquals(loadedChild, CHILD);
+        Assert.assertEquals(found, CHILD);
 
         transaction.commit();
         session.close();
+
     }
 }

@@ -14,6 +14,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -57,7 +58,7 @@ public class Client extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MaritalStatus maritalStatus;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "clients_children",
             joinColumns = @JoinColumn(name = "client_id"),

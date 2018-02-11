@@ -13,11 +13,11 @@ public class ClientDaoTest extends BaseTest {
         Session session = SESSION_FACTORY.openSession();
         Transaction transaction = session.beginTransaction();
 
-        session.save(CHILD);
-        ClientDao.getInstance().addClient(session, CLIENT);
+        ChildDao.getInstance().save(session, CHILD);
+        ClientDao.getInstance().save(session, CLIENT);
+        Client found = ClientDao.getInstance().findById(session, 1L);
 
-        Client loadedClient = ClientDao.getInstance().getClient(session, 1L);
-        Assert.assertEquals(loadedClient, CLIENT);
+        Assert.assertEquals(found, CLIENT);
 
         transaction.commit();
         session.close();

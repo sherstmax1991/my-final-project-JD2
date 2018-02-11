@@ -66,6 +66,8 @@ create table clients_children
 INSERT INTO credit_applications.children (id, first_name, last_name, birthday, gender) VALUES (1, 'Ольга', 'Тофелюк', '2018-06-01', 'FEMALE');
 
 INSERT INTO credit_applications.clients (id, first_name, last_name, login, birthday, gender, rating, marital_status) VALUES (1, 'Виталий', 'Тофелюк', 'kloyn', '1991-12-01', 'MALE', 'GOOD', 'SINGLE');
+INSERT INTO credit_applications.clients (id, first_name, last_name, login, birthday, gender, rating, marital_status) VALUES (2, 'Максим', 'Шерстобитов', 'sherstmax1991', '1991-01-29', 'MALE', 'BAD', 'SINGLE');
+INSERT INTO credit_applications.clients (id, first_name, last_name, login, birthday, gender, rating, marital_status) VALUES (3, 'Вацлава', 'Шерстобитова', 'valya', '1964-08-27', 'FEMALE', 'GOOD', 'MARRIED');
 
 INSERT INTO credit_applications.clients_children (client_id, child_id) VALUES (1, 1);
 
@@ -75,3 +77,14 @@ INSERT INTO credit_applications.credits (id, interest_type, guarantors, title, f
 INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (2, '2018-02-02', 1, 2, 3000, 24, 1500, 2000, 'UNKNOWN', 'GOOD');
 INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (1, '2018-02-01', 1, 1, 3000, 12, 3000, 4000, 'UNKNOWN', 'GOOD');
 INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (3, '2018-02-03', 1, 1, 3000, 12, 7000, 10000, 'UNKNOWN', 'BAD');
+INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (1, '2018-02-01', 1, 1, 3000, 12, 3000, 4000, 'UNKNOWN', 'GOOD');
+INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (2, '2018-02-02', 1, 2, 3000, 24, 1500, 2000, 'UNKNOWN', 'GOOD');
+INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (4, '2018-02-04', 2, 1, 800, 12, 300, 400, 'UNKNOWN', 'GOOD');
+INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (5, '2018-02-05', 2, 1, 800, 24, 150, 200, 'UNKNOWN', 'GOOD');
+INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (6, '2018-02-06', 2, 1, 800, 12, 700, 1000, 'UNKNOWN', 'BAD');
+INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (7, '2018-02-07', 2, 2, 800, 12, 300, 400, 'UNKNOWN', 'GOOD');
+INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (8, '2018-02-08', 2, 2, 800, 12, 150, 200, 'UNKNOWN', 'GOOD');
+INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (9, '2018-02-09', 1, 1, 3000, 24, 700, 1000, 'UNKNOWN', 'BAD');
+INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (10, '2018-02-10', 3, 2, 600, 12, 300, 400, 'UNKNOWN', 'GOOD');
+INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (11, '2018-02-10', 3, 1, 600, 24, 150, 200, 'UNKNOWN', 'GOOD');
+INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (12, '2018-02-10', 3, 1, 600, 18, 700, 1000, 'UNKNOWN', 'BAD');
