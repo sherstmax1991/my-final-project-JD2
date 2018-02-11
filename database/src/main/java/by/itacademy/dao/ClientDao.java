@@ -1,9 +1,7 @@
 package by.itacademy.dao;
 
 import by.itacademy.entity.Client;
-import lombok.ToString;
 
-@ToString
 public final class ClientDao extends BaseDao<Client> {
 
     private static ClientDao INSTANCE;
