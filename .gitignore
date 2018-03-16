@@ -5,4 +5,4 @@ database/target
 service/target
 web/target
 target
-out
+**/log4j.log

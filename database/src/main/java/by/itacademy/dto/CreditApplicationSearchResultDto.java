@@ -1,51 +1,47 @@
 package by.itacademy.dto;
 
 import by.itacademy.entity.CreditApplication;
-import by.itacademy.entity.enums.ApplicationQuality;
-import by.itacademy.entity.enums.ClientRating;
-import by.itacademy.entity.enums.Gender;
-import by.itacademy.entity.enums.MaritalStatus;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @Getter
 @Setter
 @ToString
-public class CreditApplicationSearchResultDto implements Serializable {
+public class CreditApplicationSearchResultDto {
 
-    private static final long serialVersionUID = -2951976345741419035L;
-
-    private LocalDate date;
-    private LocalDate birthday;
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private String date;
+    private Long age;
+    private String gender;
+    private String maritalStatus;
+    private String clientRating;
     private Integer children;
-    private Gender gender;
-    private MaritalStatus maritalStatus;
-    private ClientRating clientRating;
     private String creditTitle;
     private Integer income;
     private Integer pledge;
     private Integer sum;
     private Integer loanPeriod;
-    private ApplicationQuality applicationQuality;
-    private ApplicationQuality scoringSystemResolution;
+    private String applicationQuality;
+    private String scoringSystemResolution;
 
     public CreditApplicationSearchResultDto(CreditApplication creditApplication) {
-        this.date = creditApplication.getApplicationDate();
-        this.birthday = creditApplication.getClient().getBirthday();
+        this.date = creditApplication.getApplicationDate().toString();
+        this.age = ChronoUnit.YEARS.between(creditApplication.getClient().getBirthday(), LocalDate.now());
         this.children = creditApplication.getClient().getChildren().size();
-        this.gender = creditApplication.getClient().getGender();
-        this.maritalStatus = creditApplication.getClient().getMaritalStatus();
-        this.clientRating = creditApplication.getClient().getRating();
+        this.gender = creditApplication.getClient().getGender().toString();
+        this.maritalStatus = creditApplication.getClient().getMaritalStatus().toString();
+        this.clientRating = creditApplication.getClient().getRating().toString();
         this.creditTitle = creditApplication.getCredit().getTitle();
         this.income = creditApplication.getIncome();
         this.pledge = creditApplication.getPledge();
         this.sum = creditApplication.getSum();
         this.loanPeriod = creditApplication.getLoanPeriod();
-        this.applicationQuality = creditApplication.getApplicationQuality();
-        this.scoringSystemResolution = creditApplication.getScoringSystemResolution();
+        this.applicationQuality = creditApplication.getApplicationQuality().toString();
+        this.scoringSystemResolution = creditApplication.getScoringSystemResolution().toString();
     }
 }

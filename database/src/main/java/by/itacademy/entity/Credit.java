@@ -1,5 +1,6 @@
 package by.itacademy.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,5 +37,6 @@ public abstract class Credit extends BaseEntity {
     private Integer guarantors;
 
     @OneToMany(mappedBy = "credit", orphanRemoval = true)
+    @JsonIgnore
     private List<CreditApplication> creditApplications = new ArrayList<>();
 }

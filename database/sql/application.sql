@@ -51,7 +51,6 @@ create table applications
   PRIMARY KEY (id),
   FOREIGN KEY (client_id) REFERENCES clients(id),
   FOREIGN KEY (credit_id) REFERENCES credits(id)
-
 );
 
 create table clients_children
@@ -74,11 +73,9 @@ INSERT INTO credit_applications.clients_children (client_id, child_id) VALUES (1
 INSERT INTO credit_applications.credits (id, interest_type, guarantors, title, fixed_interest, variable_interest) VALUES (1, 'FIXED', 0, 'Standart credit', 14, null);
 INSERT INTO credit_applications.credits (id, interest_type, guarantors, title, fixed_interest, variable_interest) VALUES (2, 'VARIABLE', 1, 'Unusual credit', null, 3);
 
-INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (2, '2018-02-02', 1, 2, 3000, 24, 1500, 2000, 'UNKNOWN', 'GOOD');
 INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (1, '2018-02-01', 1, 1, 3000, 12, 3000, 4000, 'UNKNOWN', 'GOOD');
+INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (2, '2018-02-02', 1, 2, 3000, 24, 1500, 2000, 'UNKNOWN', 'GOOD');
 INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (3, '2018-02-03', 1, 1, 3000, 12, 7000, 10000, 'UNKNOWN', 'BAD');
-INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (1, '2018-02-01', 1, 1, 3000, 12, 3000, 4000, 'UNKNOWN', 'GOOD');
-INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (2, '2018-02-02', 1, 2, 3000, 24, 1500, 2000, 'UNKNOWN', 'GOOD');
 INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (4, '2018-02-04', 2, 1, 800, 12, 300, 400, 'UNKNOWN', 'GOOD');
 INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (5, '2018-02-05', 2, 1, 800, 24, 150, 200, 'UNKNOWN', 'GOOD');
 INSERT INTO credit_applications.applications (id, date, client_id, credit_id, income, loan_period, pledge, sum, quality, scoring_resolution) VALUES (6, '2018-02-06', 2, 1, 800, 12, 700, 1000, 'UNKNOWN', 'BAD');

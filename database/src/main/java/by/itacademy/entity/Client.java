@@ -3,6 +3,7 @@ package by.itacademy.entity;
 import by.itacademy.entity.enums.ClientRating;
 import by.itacademy.entity.enums.Gender;
 import by.itacademy.entity.enums.MaritalStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -67,5 +68,6 @@ public class Client extends BaseEntity {
     private List<Child> children = new ArrayList<>();
 
     @OneToMany(mappedBy = "client", orphanRemoval = true)
+    @JsonIgnore
     private List<CreditApplication> creditApplications = new ArrayList<>();
 }

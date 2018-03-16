@@ -1,6 +1,8 @@
 package by.itacademy.entity;
 
 import by.itacademy.entity.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +41,8 @@ public class Child extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @JsonIgnoreProperties("children")
     @ManyToMany(mappedBy = "children")
+    @JsonIgnore
     private List<Client> parents = new ArrayList<>();
 }
