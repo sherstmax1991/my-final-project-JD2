@@ -2,6 +2,10 @@
     margin-bottom: 8px;
 }
 
+.card-block {
+    padding: 20px;
+}
+
 .navbar {
     margin-bottom: 0;
 }
@@ -15,4 +19,18 @@ input, select, body {
 .my-btn {
     width: 140px;
     margin-top: 5px;
+}
+
+body {
+    /*background-image: url('../../resources/img/Singapore_Financial_Centre.jpg');*/
+    /*background: darkgray;*/
+    background-size: cover;
+}
+
+.container-fluid {
+    margin-top: 15px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
 }

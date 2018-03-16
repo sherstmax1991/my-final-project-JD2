@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registration</title>
+
+
+
+    <link rel="stylesheet" type="text/css" href="../../resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="../../resources/js/registration.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+
+</head>
+<body>
+<div th:replace="header">
+    <nav class="navbar navbar-dark bg-primary">
+        <a class="navbar-brand" href="${pageContext.request.contextPath}/">HOME</a>
+    </nav>
+</div>
+<div class="container-fluid row" style="margin-top: 15px">
+    <div class="col-3">
+        <div class="card">
+            <div class="card-header p-b-0">
+                <h5 class="card-title">
+                    Log In
+                </h5>
+            </div>
+            <div class="card-block">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="form-row justify-content-around">
+                        <button type="submit" class="btn btn-primary">Log In</button>
+                        <button type="submit" class="btn btn-success">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="card col-6">
+        <div class="card-header">
+            <h5 class="card-title">
+                Registration form
+            </h5>
+        </div>
+        <div class="card-block">
+            <form method="post" id="registration-form">
+                <fieldset>
+                    <legend>Clients' info</legend>
+                    <div class='form-row'>
+                        <div class="col">
+                            <label for="firstName">First name</label>
+                            <input type="text" id="firstName">
+                        </div>
+                        <div class="col">
+                            <label for="lastName">Last name</label>
+                            <input type="text" id="lastName">
+                        </div>
+                    </div>
+                    <div class='form-row'>
+                        <div class="col">
+                            <label for="username">Username</label>
+                            <input type="text" id="username">
+                        </div>
+                        <div class="col">
+                            <label for="password">Password</label>
+                            <input type="text" id="password">
+                        </div>
+                    </div>
+                    <div class='form-row'>
+                        <div class="col">
+                            <label for="birthday">Birthday</label>
+                            <input type="date" id="birthday"></div>
+                        <div class="col">
+                            <label for="gender">Gender</label>
+                            <select class="custom-select" id="gender">
+                                <option selected>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <hr>
+
+                <fieldset id="children">
+                    <div class="form-row justify-content-between">
+                        <legend class="col">Children</legend>
+                        <div class="col-1">
+                        <button class="btn btn-success" type="button" onclick="addChildFieldsToRegistrationForm()">+</button>
+                        </div>
+                    </div>
+                </fieldset>
+                <button type="button" onclick="submitRegistrationForm()"></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Currency</th>
+                <th scope="col">Buy</th>
+                <th scope="col">Sell</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">USD</th>
+                <td>1,9560</td>
+                <td>1,9780</td>
+            </tr>
+            <tr>
+                <th scope="row">EUR</th>
+                <td>2,4100</td>
+                <td>2,4350</td>
+            </tr>
+            <tr>
+                <th scope="row">100 RUB</th>
+                <td>3,3950</td>
+                <td>3,4550</td>
+            </tr>
+            <tr>
+                <th scope="row">10 PLN</th>
+                <td>5.2000</td>
+                <td>5.8000</td>
+            </tr>
+            <tr>
+                <th scope="row">GBP</th>
+                <td>2.6400</td>
+                <td>2.7400</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+</div>
+</body>
+</html>
