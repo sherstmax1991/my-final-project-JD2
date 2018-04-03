@@ -1,1 +1,1 @@
-# my-final-project-JD2
+In this project I use neuron networks (multilayer perceptron implementation of neuroph library) to predict borower's paying capacity. Project requires some refactoring, and it will get it after rebasing onto Spring Boot's rails.
