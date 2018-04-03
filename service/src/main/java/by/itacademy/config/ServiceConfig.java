@@ -6,6 +6,12 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @ComponentScan("by.itacademy.service")
-@Import(PersistenceConfig.class)
+@Import({PersistenceConfig.class, CacheConfig.class})
 public class ServiceConfig {
+
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+
 }

@@ -4,102 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home</title>
-
-
-
-
-
-
-
-
-    <link rel="stylesheet" type="text/css" href="../../resources/css/style.css">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="../../resources/js/search.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-
-
-
-
-
+    <div th:replace="fragments/imports :: imports"></div>
 </head>
 <body>
-<div th:replace="header">
-    <nav class="navbar navbar-dark bg-primary">
-        <a class="navbar-brand" href="${pageContext.request.contextPath}/">HOME</a>
-    </nav>
-</div>
+<div th:replace="fragments/navbar :: navbar"></div>
 <div class="container-fluid row">
     <div class="col-3">
-        <div class="card">
-            <div class="card-header p-b-0">
-                <h5 class="card-title">
-                    Log In
-                </h5>
-            </div>
-            <div class="card-block">
-                <form>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Password">
-                    </div>
-                    <div class="form-row justify-content-around">
-                        <button type="submit" class="btn btn-primary">Log In</button>
-                        <button type="submit" class="btn btn-success">Register</button>
-                    </div>
-                </form>
+        <div th:replace="fragments/login :: login">
+            <div class="card">
+                <div class="card-header p-b-0">
+                    <h5 class="card-title">
+                        Log In
+                    </h5>
+                </div>
+                <div class="card-block">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password">
+                        </div>
+                        <div class="form-row justify-content-around">
+                            <button type="submit" class="btn btn-primary">Log In</button>
+                            <button type="submit" class="btn btn-success">Register</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+        <hr>
+        <div th:replace="fragments/loremIpsum :: loremIpsum"></div>
     </div>
 
     <div class="col-6">
-        <div id="carouselExampleControls" class="carousel slide w-100 ml-auto mr-auto" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <a href="/credit_applications">
-                        <img class="w-100" src="../../resources/img/16.jpg" alt="There could be your image">
-                    </a>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>There could be your header</h5>
-                        <p>There could be your description</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <a href="/credit_applications">
-                        <img class="w-100" src="../../resources/img/16.jpg"  alt="There could be your image">
-                    </a>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>There could be your header</h5>
-                        <p>There could be your description</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <a href="/credit_applications">
-                        <img class="w-100" src="../../resources/img/16.jpg" alt="There could be your image">
-                    </a>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>There could be your header</h5>
-                        <p>There could be your description</p>
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
+        <div th:replace="fragments/advertisement :: advertisement">
+
         </div>
         <hr>
         <div class="row">
@@ -110,7 +50,7 @@
                     aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
                     culpa qui officia deserunt mollit anim id est laborum."</p>
-                <p><button class="btn btn-outline-success">Read More</button></p>
+                <p><button class="btn btn-outline-success" th:text="#{read.more}">Read More</button></p>
             </div>
         </div>
         <hr>
@@ -122,7 +62,7 @@
                     aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
                     culpa qui officia deserunt mollit anim id est laborum."</p>
-                <p><button class="btn btn-outline-success">Read More</button></p>
+                <p><button class="btn btn-outline-success" th:text="#{read.more}">Read More</button></p>
             </div>
         </div>
         <hr>
@@ -134,51 +74,52 @@
                     aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
                     culpa qui officia deserunt mollit anim id est laborum."</p>
-                <p><button class="btn btn-outline-success">Read More</button></p>
+                <p><button class="btn btn-outline-success" th:text="#{read.more}">Read More</button></p>
             </div>
         </div>
         <hr>
     </div>
 
     <div class="col-3">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Currency</th>
-                <th scope="col">Buy</th>
-                <th scope="col">Sell</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">USD</th>
-                <td>1,9560</td>
-                <td>1,9780</td>
-            </tr>
-            <tr>
-                <th scope="row">EUR</th>
-                <td>2,4100</td>
-                <td>2,4350</td>
-            </tr>
-            <tr>
-                <th scope="row">100 RUB</th>
-                <td>3,3950</td>
-                <td>3,4550</td>
-            </tr>
-            <tr>
-                <th scope="row">10 PLN</th>
-                <td>5.2000</td>
-                <td>5.8000</td>
-            </tr>
-            <tr>
-                <th scope="row">GBP</th>
-                <td>2.6400</td>
-                <td>2.7400</td>
-            </tr>
-            </tbody>
-        </table>
+        <div th:replace="fragments/exchangeRates :: exchangeRates">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Currency</th>
+                    <th scope="col">Buy</th>
+                    <th scope="col">Sell</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">USD</th>
+                    <td>1,9560</td>
+                    <td>1,9780</td>
+                </tr>
+                <tr>
+                    <th scope="row">EUR</th>
+                    <td>2,4100</td>
+                    <td>2,4350</td>
+                </tr>
+                <tr>
+                    <th scope="row">100 RUB</th>
+                    <td>3,3950</td>
+                    <td>3,4550</td>
+                </tr>
+                <tr>
+                    <th scope="row">10 PLN</th>
+                    <td>5.2000</td>
+                    <td>5.8000</td>
+                </tr>
+                <tr>
+                    <th scope="row">GBP</th>
+                    <td>2.6400</td>
+                    <td>2.7400</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-
 </div>
 </body>
 </html>

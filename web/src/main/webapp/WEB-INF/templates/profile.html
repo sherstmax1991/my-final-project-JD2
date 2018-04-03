@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile</title>
+    <div th:replace="fragments/imports :: imports"></div>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container-fluid row">
+    <div class="col-3">
+        <div th:replace="fragments/advertisement :: advertisement"></div>
+    </div>
+
+    <div class="col">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true" th:text="#{profile}">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="creditHistory-tab" data-toggle="tab" href="#creditHistory" role="tab" aria-controls="creditHistory" aria-selected="false" th:text="#{credit.history}">Credit history</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div th:replace="fragments/clientInfo :: clientInfo"></div>
+                <div class="card-footer d-flex flex-row-reverse">
+                    <button class="btn btn-primary" type="button" onclick="updateClientInfo()" th:text="#{update}">Update</button>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="creditHistory" role="tabpanel" aria-labelledby="creditHistory-tab">
+                <button type="button" class="btn btn-primary" onclick="getClientApplications()" th:text="#{refresh}">Refresh</button>
+                <div id="credits-search-result"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div th:replace="fragments/exchangeRates :: exchangeRates">
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,43 +1,61 @@
+let dtoLists = ["marital status", "gender", "clientRating", "creditId", "applicationQuality", "scoringSystemResolution"];
+
 function sendInputDataToServer() {
-    let searchFormDto = createFormObject('#search-form');
+    let searchFormDto = createFormObject('#search-form', dtoLists);
     searchFormDto.page = document.activeElement.getAttribute('value');
-    $.ajax('/credit_applications', {
+    $.ajax('/admin/creditApplications', {
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(searchFormDto)
     }).done(function(data) {
         let resultPage = data.resultPage;
-        if (resultPage[0] == null) {
-            document.getElementById("search-result").innerHTML = 'No such applications';
-            return;
-        }
-        document.getElementById("search-result").innerHTML = '';
-
-        let table = createElementWithClasses("table", ["table", "table-striped"]);
-        let tHead = createElementWithClasses("thead", ["thead-light"]);
-
-        let trHead = document.createElement("tr");
-        fillRowWithValues(trHead, Object.keys(resultPage[0]));
-
-        tHead.appendChild(trHead);
-        table.appendChild(tHead);
-
-        let tbody = document.createElement("tbody");
-
-        for (let i = 0; i < resultPage.length; i++) {
-            let tr = document.createElement("tr");
-
-            fillRowWithObjectFieldsValues(tr, resultPage[i]);
-
-            tbody.appendChild(tr);
-        }
-
-        table.appendChild(tbody);
-
+        let table = createTableFromList(resultPage, "search-result");
         let pages = createPageButtons(searchFormDto.page, data.lastPage);
         document.getElementById("search-result").appendChild(pages);
         document.getElementById("search-result").appendChild(table);
     });
+}
+
+function generateApplications() {
+    let dto = createFormObject('#search-form', dtoLists);
+    $.ajax('/god/generator', {
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(dto)
+    }).done(function(data) {
+        let table = createTableFromList(data, "search-result");
+        document.getElementById("search-result").appendChild(table);
+    });
+}
+
+function createTableFromList(list, resultDivId) {
+    if (list[0] == null) {
+        document.getElementById(resultDivId).innerHTML = 'No such applications';
+        return null;
+    }
+
+    document.getElementById(resultDivId).innerHTML = '';
+
+    let table = createElementWithClasses("table", ["table", "table-striped"]);
+    let tHead = createElementWithClasses("thead", ["thead-light"]);
+
+    let trHead = document.createElement("tr");
+    fillRowWithValues(trHead, beautifyCamelCaseArray(Object.keys(list[0])));
+
+    tHead.appendChild(trHead);
+    table.appendChild(tHead);
+
+    let tbody = document.createElement("tbody");
+
+    for (let i = 0; i < list.length; i++) {
+        let tr = document.createElement("tr");
+        fillRowWithObjectFieldsValues(tr, list[i]);
+        tbody.appendChild(tr);
+    }
+
+    table.appendChild(tbody);
+
+    return table;
 }
 
 function fillRowWithValues(tr, list) {
@@ -87,31 +105,18 @@ function createPageButtons(page, lastPage) {
     return ul;
 }
 
-function createFormObject(formId) {
+function createFormObject(formId, lists) {
     let searchFormDto = {};
-    $.each($(formId).serializeArray(), function (_, initialForm) {
-        if (initialForm.name.substring(0, 1) !== '_') {
-            if (searchFormDto.hasOwnProperty(initialForm.name)) {
-                searchFormDto[initialForm.name] = $.makeArray(searchFormDto[initialForm.name]);
-                searchFormDto[initialForm.name].push(initialForm.value);
+    $.each($(formId).serializeArray(), function (_, property) {
+        if (property.name.substring(0, 1) !== '_') {
+            if ((searchFormDto.hasOwnProperty(property.name)) || (lists.includes(property.name))) {
+                searchFormDto[property.name] = $.makeArray(searchFormDto[property.name]);
+                searchFormDto[property.name].push(property.value);
             }
             else {
-                searchFormDto[initialForm.name] = initialForm.value;
+                searchFormDto[property.name] = property.value;
             }
         }
     });
     return searchFormDto;
 }
-//
-// function getCheckboxInputs(checkboxName) {
-//     let result = $("input[name=" + checkboxName + "]:checked").map(function(){
-//         return this.id;
-//     }).get();
-//
-//     if (result.length === 0) {
-//         result = $("input[name=" + checkboxName + "]:not(checked)").map(function(){
-//             return this.id;
-//         }).get();
-//     }
-//     return result;
-// }

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Client's info</title>
+</head>
+<body>
+<div th:fragment="clientInfo">
+    <form id="client-form" th:object="${clientDto}" th:fragment="clientInfo">
+        <fieldset>
+            <legend th:text="#{parameters.client}">Clients' info</legend>
+            <div class='form-row'>
+                <div class="col">
+                    <label for="firstName" th:text="#{firstName}">First name</label>
+                    <input type="text" id="firstName" th:field="*{firstName}" >
+                </div>
+                <div class="col">
+                    <label for="lastName" th:text="#{lastName}">Last name</label>
+                    <input type="text" id="lastName" th:field="*{lastName}">
+                </div>
+            </div>
+            <div class='form-row'>
+                <div class="col">
+                    <label for="birthday" th:text="#{birthday}">Birthday</label>
+                    <input type="date" id="birthday" th:field="*{birthday}"></div>
+                <div class="col">
+                    <label for="gender" th:text="#{gender}">Gender</label>
+                    <select class="custom-select" id="gender" th:field="*{gender}">
+                        <option th:value="MALE" selected th:text="#{gender.male}">Male</option>
+                        <option th:value="FEMALE" th:text="#{gender.female}">Female</option>
+                    </select>
+                </div>
+            </div>
+            <div class='form-row'>
+                <div class="col">
+                    <label for="maritalStatus" th:text="#{maritalStatus}">Marital status</label>
+                    <select class="custom-select" id="maritalStatus" th:field="*{maritalStatus}">
+                        <option th:value="SINGLE" selected th:text="#{maritalStatus.single}">SINGLE</option>
+                        <option th:value="MARRIED" th:text="#{maritalStatus.married}">MARRIED</option>
+                        <option th:value="DIVORCED" th:text="#{maritalStatus.divorced}">DIVORCED</option>
+                    </select>
+                </div>
+                <div class="col" style="display: none;">
+                    <label for="rating" th:text="#{clientRating}">Rating</label>
+                    <select class="custom-select" id="rating" th:field="*{rating}">
+                        <option th:value="GOOD" selected th:text="#{clientRating.good}">GOOD</option>
+                        <option th:value="BAD" th:text="#{clientRating.bad}">BAD</option>
+                        <option th:value="VIP" th:text="#{clientRating.vip}">VIP</option>
+                        <option th:value="PROBLEM" th:text="#{clientRating.problem}">PROBLEM</option>
+                        <option th:value="NORMAL" th:text="#{clientRating.normal}">NORMAL</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+        <hr>
+
+        <fieldset id="children-fieldset">
+            <div class="form-row justify-content-between">
+                <legend class="col" id="children-counter" th:value="${client.children.size()}" th:text="#{children} + '(' + ${client.children.size()} + ')' ">Children</legend>
+                <div class="col-2">
+                    <button class="btn btn-success" type="button" onclick="addChildFieldsToRegistrationForm()" th:text="#{add.child}">+ Add child</button>
+                </div>
+            </div>
+            <div th:each="child, rowStat : *{children}" id="children-list">
+                <div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-row" style="display: none;">
+                                <div class="col"><input type="text" th:field="*{children[__${rowStat.index}__].id}"></div>
+                            </div>
+                            <div class='form-row'>
+                                <div class="col">
+                                    <label th:for="|firstName${rowStat.index}|" th:text="#{firstName}">First name</label>
+                                    <input type="text" th:id="|firstName${rowStat.index}|" th:field="*{children[__${rowStat.index}__].firstName}" >
+                                </div>
+                                <div class="col">
+                                    <label th:for="|lastName${rowStat.index}|" th:text="#{lastName}">Last name</label>
+                                    <input type="text" th:id="|lastName${rowStat.index}|" th:field="*{children[__${rowStat.index}__].lastName}">
+                                </div>
+                            </div>
+                            <div class='form-row'>
+                                <div class="col">
+                                    <label th:for="|birthday${rowStat.index}|" th:text="#{birthday}">Birthday</label>
+                                    <input type="date" th:id="|birthday${rowStat.index}|" th:field="*{children[__${rowStat.index}__].birthday}"></div>
+                                <div class="col">
+                                    <label th:for="|gender${rowStat.index}|" th:text="#{gender}">Gender</label>
+                                    <select class="custom-select" th:id="|gender${rowStat.index}|" th:field="*{children[__${rowStat.index}__].gender}">
+                                        <option th:value="MALE">Male</option>
+                                        <option th:value="FEMALE">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-warning" type="button" onclick="removeChildOnButton(this)" style="height: 50%">-</button>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>

@@ -6,14 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
 public class ChildServiceImpl implements ChildService {
 
-    private final ChildRepository childRepository;
+    private ChildRepository childRepository;
 
     @Autowired
     public ChildServiceImpl(ChildRepository childRepository) {
@@ -21,15 +20,17 @@ public class ChildServiceImpl implements ChildService {
     }
 
     @Override
-    public void save(Child child) {
-        childRepository.save(child);
+    public List<Child> findAll() {
+        return childRepository.findAll();
     }
 
     @Override
-    public List<Child> findAll() {
-        Iterable<Child> children = childRepository.findAll();
-        ArrayList<Child> result = new ArrayList<>();
-        children.forEach(result::add);
-        return result;
+    public Child save(Child child) {
+        return childRepository.save(child);
+    }
+
+    @Override
+    public void deleteAllByIfRealIsFalse() {
+        childRepository.deleteAllByIfRealIsFalse();
     }
 }

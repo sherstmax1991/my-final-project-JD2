@@ -18,7 +18,7 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "by.itacademy.controller")
-@Import(value = {InternationalizationConfig.class, ThymeleafConfig.class})
+@Import(value = {InternationalizationConfig.class, ThymeleafConfig.class, AspectConfig.class})
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override

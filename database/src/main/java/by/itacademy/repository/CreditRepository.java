@@ -1,7 +1,7 @@
 package by.itacademy.repository;
 
 import by.itacademy.entity.Credit;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CreditRepository extends CrudRepository<Credit, Long> {
+public interface CreditRepository extends JpaRepository<Credit, Long> {
 }

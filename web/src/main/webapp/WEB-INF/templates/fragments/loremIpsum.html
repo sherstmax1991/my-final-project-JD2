@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card" th:fragment="loremIpsum">
+    <div class="card-header p-b-0">
+        <h5 class="card-title" th:text="#{news}">
+            News
+        </h5>
+    </div>
+    <div class="card-block">
+        <div class="col" style="padding-left: 15px; padding-right: 15px;">
+            <h2>Lorem ipsum</h2>
+            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                culpa qui officia deserunt mollit anim id est laborum."</p>
+            <p><button class="btn btn-outline-success">Read More</button></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Credit application</title>
+    <div th:replace="fragments/imports :: imports"></div>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="container-fluid row">
+    <div class="col-3">
+        <div th:replace="fragments/loremIpsum :: loremIpsum"></div>
+    </div>
+
+    <div class="col">
+        <div id="scoring-resolution"></div>
+        <form id="application-form" method="post" th:action="@{/creditApplication}" th:object="${creditApplicationDto}">
+            <legend th:text="#{parameters.applications}">Applications parameters</legend>
+            <div class="form-row">
+                <div class="col">
+                    <label for='loanPeriodFrom' th:text="#{loan.period}">Loan period</label>
+                    <div class="col">
+                        <input class="form-control" type='number' th:field="*{loanPeriod}" id="loanPeriodFrom" min="3" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for='income' th:text="#{income}">Income</label>
+                    <div class="col">
+                        <input class="form-control" type='number' th:field="*{income}" id="income" step="10" min="100" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for='pledge' th:text="#{pledge}">Pledge</label>
+                    <div class="col">
+                        <input class="form-control" type='number' th:field="*{pledge}" id="pledge" step="10" min="0" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for='sum' th:text="#{sum}">Sum</label>
+                    <div class="col">
+                        <input class="form-control" type='number' th:field="*{sum}" id="sum" step="10" min="100" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for='creditId' th:text="#{credit}">Credit</label>
+                    <select class="custom-select" id="creditId" th:field="*{creditId}">
+                        <option th:each="credit : ${credits}" th:value="${credit.id}" th:text="${credit.title}"></option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit" th:text="#{submit}">Submit</button>
+        </form>
+    </div>
+    <div class="col-3">
+        <div th:replace="fragments/exchangeRates :: exchangeRates"></div>
+    </div>
+</div>
+</body>
+</html>

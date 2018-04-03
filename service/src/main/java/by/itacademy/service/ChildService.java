@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface ChildService {
 
-    void save(Child child);
-
     List<Child> findAll();
+
+    Child save(Child child);
+
+    void deleteAllByIfRealIsFalse();
 }

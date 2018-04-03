@@ -14,7 +14,7 @@ import java.time.temporal.ChronoUnit;
 @ToString
 public class CreditApplicationSearchResultDto {
 
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String date;
     private Long age;
     private String gender;

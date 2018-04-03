@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Credit application generator</title>
+    <div th:replace="fragments/imports :: imports"></div>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="btn-group">
+    <button class="btn btn-light" type="button" data-toggle="modal" data-target="#applicationsCollapse" th:text="#{create.credit.applications}">Create credit applications</button>
+    <a th:href="@{/god/generator/clear}"><button class="btn btn-light" th:text="#{delete.created.entities}">Delete created entities</button></a>
+</div>
+<div class="modal fade" id="applicationsCollapse" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="form" style="max-width: 80%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" th:text="#{applications}">Applications</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="search-form" class="form-row justify-content-around" method="post" th:object="${creditApplicationGeneratorDto}">
+                    <fieldset class="col-8">
+
+                        <legend th:text="#{parameters.applications}">Applications parameters</legend>
+
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="amountOfApplications" th:text="#{amount}">Amount of applications</label>
+                                <input class="form-control" type='number' th:field="*{amountOfApplications}" id="amountOfApplications" step="1" min="0" required>
+                            </div>
+                            <div class="col">
+                                <label for="goodApplicationPercent" th:text="#{good.applications}">Good applications percent</label>
+                                <input class="form-control" type='number' th:field="*{goodApplicationPercent}" id="goodApplicationPercent" step="1" max="100" min="0" required>
+                            </div>
+                        </div>
+
+                        <div class='form-row justify-content-between'>
+                            <div class="col">
+                                <label for="dateFrom" th:text="#{period}">Period</label>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input class="form-control" id="dateFrom" type="date" th:field="*{dateFrom}" required>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-control" id="dateTo" type="date" th:field="*{dateTo}" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-1"></div>
+
+                            <div class="col">
+                                <label for='loanPeriodFrom' th:text="#{loan.period}">Loan period</label>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input class="form-control" type='number' th:field="*{loanPeriodFrom}" id="loanPeriodFrom" min="3" required>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-control" type='number' th:field="*{loanPeriodTo}" id="loanPeriodTo" min="3" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class='form-row justify-content-between'>
+                            <div class="col">
+                                <label for='incomeFrom' th:text="#{income}">Income</label>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input class="form-control" type='number' th:field="*{incomeFrom}" id="incomeFrom" step="10" min="100" required>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-control" type='number' th:field="*{incomeTo}" id="incomeTo" step="10" min="100" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-1"></div>
+
+                            <div class="col">
+                                <label for='pledgeFrom' th:text="#{pledge}">Pledge</label>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input class="form-control" type='number' th:field="*{pledgeFrom}" id="pledgeFrom" step="10" min="0" required>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-control" type='number' th:field="*{pledgeTo}" id="pledgeTo" step="10" min="0" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-1"></div>
+
+                            <div class="col">
+                                <label for='sumFrom' th:text="#{sum}">Sum</label>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input class="form-control" type='number' th:field="*{sumFrom}" id="sumFrom" step="10" min="100" required>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-control" type='number' th:field="*{sumTo}" id="sumTo" step="10" min="100" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class='form-row'>
+                            <div class="col-3">
+                                <p th:text="#{credits}">Credits</p>
+                            </div>
+                            <div class="col-9">
+                                <div class="form-check form-check-inline" th:each="credit : ${credits}">
+                                    <input class="form-check-input" type="checkbox" th:field="*{creditId}" th:value="${credit}">
+                                    <span class="form-check-label" th:text="${credit}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <hr>
+
+                    <fieldset class="col-3">
+                        <legend th:text="#{parameters.client}">Clients' parameters</legend>
+
+                        <div class="form-row">
+                            <div class="col-4">
+                                <p th:text="#{amount}">Amount of clients</p>
+                            </div>
+                            <div class="col-8">
+                                <input class="form-control" type='number' th:field="*{amountOfClients}" step="1" min="0" required>
+                            </div>
+                        </div>
+
+                        <div class='form-row'>
+                            <div class="col-4">
+                                <p th:text="#{children}">Children</p>
+                            </div>
+                            <div class="col-4">
+                                <input class="form-control" type='number' th:field="*{childrenFrom}" step="1" min="0" required>
+                            </div>
+                            <div class="col-4">
+                                <input class="form-control" type='number' th:field="*{childrenTo}" step="1" min="0" required>
+                            </div>
+                        </div>
+
+                        <div class='form-row'>
+                            <div class="col-4">
+                                <p th:text="#{age}">Age</p>
+                            </div>
+                            <div class="col-4">
+                                <input class="form-control" type='number' th:field="*{ageFrom}" step="1" min="18" max="70" required>
+                            </div>
+                            <div class="col-4">
+                                <input class="form-control" type='number' th:field="*{ageTo}" step="1" min="18" max="70" required>
+                            </div>
+                        </div>
+
+                        <div class='form-row'>
+                            <div class="col-4">
+                                <p th:text="#{gender}">Gender</p>
+                            </div>
+                            <div class="col-8">
+                                <div class="form-check form-check-inline" th:each="gender : ${gender}">
+                                    <input class="form-check-input" type="checkbox" th:field="*{gender}" th:value="${gender}">
+                                    <span class="form-check-label" th:text="#{${'gender.' + #strings.toLowerCase(gender)}}"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class='form-row'>
+                            <div class="col">
+                                <p th:text="#{maritalStatus}">Marital status</p>
+                                <div class="form-check" th:each="maritalStatus : ${maritalStatus}">
+                                    <div class="form-check-inline">
+                                        <input class="form-check-input" type="checkbox" th:field="*{maritalStatus}" th:value="${maritalStatus}">
+                                        <span class="form-check-label" th:text="#{${'maritalStatus.' + #strings.toLowerCase(maritalStatus)}}"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <p th:text="#{clientRating}">Client's rating</p>
+                                <div class="form-check" th:each="clientRating : ${clientRating}">
+                                    <div class="form-check-inline">
+                                        <input class="form-check-input" type="checkbox" th:field="*{clientRating}" th:value="${clientRating}">
+                                        <span class="form-check-label" th:text="#{${'clientRating.' + #strings.toLowerCase(clientRating)}}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{close}">Close</button>
+                <button type="button" class="btn btn-primary" value="1" onclick="generateApplications()" th:text="#{submit}">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="search-result"></div>
+</body></html>

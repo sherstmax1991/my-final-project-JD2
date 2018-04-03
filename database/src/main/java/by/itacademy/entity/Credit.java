@@ -25,7 +25,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "credits")
-@ToString(exclude = "creditApplications")
+@ToString(exclude = "creditApplications", callSuper = true)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "interest_type")
 public abstract class Credit extends BaseEntity {

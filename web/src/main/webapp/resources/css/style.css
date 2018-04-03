@@ -1,5 +1,7 @@
 .form-row {
     margin-bottom: 8px;
+    margin-top: 16px;
+
 }
 
 .card-block {
@@ -22,9 +24,12 @@ input, select, body {
 }
 
 body {
-    /*background-image: url('../../resources/img/Singapore_Financial_Centre.jpg');*/
-    /*background: darkgray;*/
     background-size: cover;
+}
+
+input[type=checkbox]
+{
+    -webkit-appearance:checkbox;
 }
 
 .container-fluid {

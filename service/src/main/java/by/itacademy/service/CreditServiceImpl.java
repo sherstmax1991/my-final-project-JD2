@@ -3,17 +3,20 @@ package by.itacademy.service;
 import by.itacademy.entity.Credit;
 import by.itacademy.repository.CreditRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
+@CacheConfig(cacheNames = "credits")
 public class CreditServiceImpl implements CreditService {
 
-    private final CreditRepository creditRepository;
+    private CreditRepository creditRepository;
 
     @Autowired
     public CreditServiceImpl(CreditRepository creditRepository) {
@@ -21,10 +24,21 @@ public class CreditServiceImpl implements CreditService {
     }
 
     @Override
+    @Cacheable
     public List<Credit> findAll() {
-        Iterable<Credit> credits = creditRepository.findAll();
-        ArrayList<Credit> result = new ArrayList<>();
-        credits.forEach(result::add);
+        return creditRepository.findAll();
+    }
+
+    @Override
+    @Cacheable
+    public Credit findOne(Long id) {
+        Credit result = creditRepository.findOne(id);
         return result;
+    }
+
+    @Override
+    @CacheEvict
+    public Credit save(Credit credit) {
+        return creditRepository.save(credit);
     }
 }

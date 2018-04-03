@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="advertisement">
+    <div id="carouselExampleControls" class="carousel slide w-100 ml-auto mr-auto" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <a th:href="@{/creditApplication}">
+                    <img class="w-100" src="../../resources/img/16.jpg" alt="There could be your image">
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 th:text="#{there.could.be.your.header}">There could be your header</h5>
+                    <p th:text="#{there.could.be.your.description}">There could be your description</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <a th:href="@{/creditApplication}">
+                    <img class="w-100" src="../../resources/img/16.jpg"  alt="There could be your image">
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h5 th:text="#{there.could.be.your.header}">There could be your header</h5>
+                    <p th:text="#{there.could.be.your.description}">There could be your description</p>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only" th:text="#{previous}">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only" th:text="#{next}">Next</span>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

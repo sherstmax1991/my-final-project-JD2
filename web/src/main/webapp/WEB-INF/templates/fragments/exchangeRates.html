@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Exchange rates</title>
+</head>
+<body>
+<div th:fragment="exchangeRates">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col" th:text="#{currency}">Currency</th>
+            <th scope="col" th:text="#{buy}">Buy</th>
+            <th scope="col" th:text="#{sell}">Sell</th>
+        </tr>
+        </thead>
+        <tbody th:each="currency : ${exchangeRates}">
+        <tr>
+            <th scope="col" th:text="${currency.title}">USD</th>
+            <td scope="col" th:text="${currency.buy}">1</td>
+            <td scope="col" th:text="${currency.sell}">2</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

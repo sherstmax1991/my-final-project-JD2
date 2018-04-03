@@ -7,4 +7,8 @@ import java.util.List;
 public interface CreditService {
 
     List<Credit> findAll();
+
+    Credit findOne(Long id);
+
+    Credit save(Credit credit);
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" th:fragment="navbar">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li>
+                <a class="nav-link active" th:href="@{/home}" th:text="#{home}">Home</a>
+            </li>
+            <li sec:authorize="isAnonymous()">
+                <a th:href="@{/registration}" class="nav-link active" th:text="#{register}">Register</a>
+            </li>
+            <li sec:authorize="hasAuthority('USER')">
+                <a th:href="@{/profile}" class="nav-link active" th:text="#{profile}">Profile</a>
+            </li>
+            <li sec:authorize="hasAuthority('USER')">
+                <a th:href="@{/creditApplication}" class="nav-link active" th:text="#{getCredit}">Get credit</a>
+            </li>
+            <li sec:authorize="hasAuthority('ADMIN')" class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{admin}">
+                    Admin
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" th:href="@{/admin/creditApplications}" th:text="#{credit.application}">Credit applications</a>
+                    <a class="dropdown-item" th:href="@{/admin/exchangeRates}" th:text="#{exchange.rates}">Exchange Rates</a>
+                    <a class="dropdown-item" th:href="@{/admin/neuronNetwork}" th:text="#{neuron.network}">Neuron network</a>
+                    <a class="dropdown-item" th:href="@{/admin/creditApplication/update}" th:text="#{edit.application}">Edit application</a>
+                </div>
+            </li>
+            <li sec:authorize="hasAuthority('GOD')">
+                <a th:href="@{/god/generator}" class="nav-link active" th:text="#{godlike}">GodLike</a>
+            </li>
+        </ul>
+        <select class="col-1 dropdown" id="locales" style="margin-right: 8px">
+            <option value="ru_RU" th:selected="__${#locale}__=='ru_RU'">Русский</option>
+            <option value="en_US" th:selected="__${#locale}__=='en_US'">English</option>
+        </select>
+        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
+            <button class="btn btn-light my-2 my-sm-0" type="submit" th:text="#{logout}">Exit</button>
+        </form>
+    </div>
+</nav>
+</body>
+</html>

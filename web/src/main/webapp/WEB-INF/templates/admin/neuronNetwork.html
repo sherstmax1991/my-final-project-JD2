@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Neuron network</title>
+    <div th:replace="fragments/imports :: imports"></div>
+    </div>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar"></div>
+<div class="row">
+    <button class="btn btn-light" type="button" data-toggle="modal" data-target="#settingsCollapse" th:text="#{create.neuron.network}">Create neuron network</button>
+    <a th:href="@{/admin/neuronNetwork/refreshResolutions}">
+        <button class="btn btn-light" th:text="#{refresh.scoring.system.resolution}">Refresh scoring system resolutions</button>
+    </a>
+</div>
+<div class="modal fade" id="settingsCollapse" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="form" style="max-width: 50%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" th:text="#{neuron.network}">Neuron network</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="create-network" class="form" method="post" th:object="${neuronNetworkSettingsDto}">
+                    <div class='form-row justify-content-between'>
+                        <div class="col">
+                            <div class="form-row">
+                                <div class="col">
+                                <label for="trainSetPercent" th:text="#{train.percent}">Train percent</label>
+                                    <input class="form-control" id="trainSetPercent" type="number" th:field="*{trainSetPercent}" required min="0" max="100">
+                                </div>
+                                <div class="col">
+                                <label for="testSetPercent" th:text="#{test.percent}">Test percent</label>
+                                    <input class="form-control" id="testSetPercent" type="number" th:field="*{testSetPercent}" required min="0" max="100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='form-row justify-content-between'>
+                        <div class="col">
+                            <div class="form-row">
+                                <div class="col">
+                                <label for='learningRate' th:text="#{learning.rate}">Learning rate</label>
+                                    <input class="form-control" type='number' th:field="*{learningRate}" id="learningRate" min="0" required>
+                                </div>
+                                <div class="col">
+                                <label for='maxError' th:text="#{max.error}">Max error</label>
+                                    <input class="form-control" type='number' th:field="*{maxError}" id="maxError" min="0" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='form-row justify-content-between' >
+                        <div class="col-2" th:each="layer,rowStat : *{layers}">
+                            <label th:for="|layer${rowStat.index + 1}|" th:text="#{layer} + '(' + ${rowStat.index + 1} + ')'">Layers</label>
+                            <input class="form-control" type="number" th:id="|layer${rowStat.index}|" th:field="*{layers[__${rowStat.index}__]}">
+                        </div>
+                    </div>
+                    <div class='form-row'>
+                        <label for="maxIterations" th:text="#{max.iterations}">Max iterations</label>
+                        <div class="col-2">
+                            <input class="form-control" type='number' id="maxIterations" th:field="*{maxIterations}" min="1" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{close}">Close</button>
+                <button type="button" class="btn btn-primary" value="1" onclick="refreshNeuronNetwork()" th:text="#{submit}">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="result"></div>
+</body>
+</html>

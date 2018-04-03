@@ -1,7 +1,9 @@
 package by.itacademy.repository;
 
 import by.itacademy.entity.Child;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ChildRepository extends CrudRepository<Child, Long> {
+public interface ChildRepository extends JpaRepository<Child, Long> {
+
+    void deleteAllByIfRealIsFalse();
 }
